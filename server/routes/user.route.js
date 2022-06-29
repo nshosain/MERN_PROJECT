@@ -61,7 +61,6 @@ router.post("/api/login", async (req, res) => {
       error: "Provide a valid Email Address!",
     });
   }
-
   // get user from db
   const user = await User.findOne({
     email: req.body.email,
