@@ -23,3 +23,8 @@ cd server
 npm install
 npm run dev
 ```
+
+## API Endpoints 🤖
+
+> http://localhost:1337/api/register
+> http://localhost:1337/api/login
