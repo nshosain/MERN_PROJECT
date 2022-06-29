@@ -127,7 +127,7 @@ function Register() {
         />
         <br />
         <br />
-        <input type="submit" value="Register" />
+        <input type="submit" value="Register" style={{ fontSize: "20px" }} />
       </form>
       <div>
         <p>

@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
 
   // logout user form system
   function logout() {
-    console.log("fucasdasds");
     // clearing JWT token
     localStorage.clear();
     // redirect to login page
@@ -27,9 +27,9 @@ const Dashboard = () => {
     const data = await response.json();
     // check if data contains user's name
     if (data.status === "ok") {
-      console.log(name);
       // if there is a name, set it to state variable name
       setName(data.name);
+      setImage(data.image);
     } else {
       // if no name found in data, alert user
       alert(data.error);
@@ -68,7 +68,12 @@ const Dashboard = () => {
         <a href="https://github.com/nshosain/MERN_PROJECT"> here!</a>
       </h4>
       <br />
-      <button onClick={logout}>Logout</button>
+      <img src={image} height="400px" />
+      <br />
+      <br />
+      <button onClick={logout} style={{ fontSize: "20px" }}>
+        Logout
+      </button>
     </div>
   );
 };

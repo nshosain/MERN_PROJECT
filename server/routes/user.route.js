@@ -81,7 +81,7 @@ router.get("/api/userdata", async (req, res) => {
     // get userdata from db
     const user = await User.findOne({ email: email });
     // send user name to client
-    res.json({ status: "ok", name: user.name });
+    res.json({ status: "ok", name: user.name, image: user.image });
   } catch (err) {
     // if token not valid, return error msg
     console.log(err);

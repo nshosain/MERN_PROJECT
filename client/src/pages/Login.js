@@ -67,7 +67,8 @@ function Login() {
           placeholder="password"
         />
         <br />
-        <input type="submit" value="Login" />
+        <br />
+        <input type="submit" value="Login" style={{ fontSize: "20px" }} />
       </form>
       <div>
         <p>
