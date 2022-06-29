@@ -8,30 +8,40 @@ function Register() {
 
   const navigate = useNavigate();
 
+  function isInputValid() {
+    if (name === "" || email === "" || password === "") {
+      alert("Fields Can not be empty!");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async function registerUser(event) {
     event.preventDefault();
+    if (isInputValid()) {
+      const response = await fetch("http://localhost:1337/api/register", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
 
-    const response = await fetch("http://localhost:1337/api/register", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
+      const data = await response.json();
 
-    const data = await response.json();
-
-    // if registration is successful
-    //  navigate to login page
-    if (data.status === "ok") {
-      alert("Registration Successful!");
-      navigate("/login");
+      // if registration is successful
+      //  navigate to login page
+      if (data.status === "ok") {
+        alert("Registration Successful!");
+        navigate("/login");
+      }
+      console.log(data);
     }
-    console.log(data);
   }
 
   //returns a registraion form
@@ -58,6 +68,8 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="password"
+          pattern=".{4,}"
+          title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
         />
         <br />
         <input type="submit" value="Register" />

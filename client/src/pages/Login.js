@@ -4,34 +4,45 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  function isInputValid() {
+    if (email === "" || password === "") {
+      alert("Fields Can not be empty!");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async function loginUser(event) {
     event.preventDefault();
-    const response = await fetch("http://localhost:1337/api/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    if (isInputValid()) {
+      const response = await fetch("http://localhost:1337/api/login", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-    // convert server response to JSON
-    const data = await response.json();
+      // convert server response to JSON
+      const data = await response.json();
 
-    //if user exists
-    if (data.user) {
-      // keeping jwt token in browser storage
-      localStorage.setItem("token", data.user);
+      //if user exists
+      if (data.user) {
+        // keeping jwt token in browser storage
+        localStorage.setItem("token", data.user);
 
-      // redirect to dashboard page
-      window.location.href = "/dashboard";
-    } else {
-      // for unsuccessful login attempt
-      alert("Please Check the Login Credentials!");
+        // redirect to dashboard page
+        window.location.href = "/dashboard";
+      } else {
+        // for unsuccessful login attempt
+        alert("Please Check the Login Credentials!");
+      }
+      console.log(data);
     }
-    console.log(data);
   }
 
   //returns a login form

@@ -36,15 +36,15 @@ router.post("/api/login", async (req, res) => {
     email: req.body.email,
   });
 
+  if (!user) {
+    return res.json({ status: "error", error: "Invalid Email" });
+  }
+
   // checking if user password is valid
   const isPasswordValid = await bcrypt.compare(
     req.body.password,
     user.password
   );
-
-  if (!user) {
-    return { status: "error", error: "Invalid Email" };
-  }
 
   //if user password is valid, return user with jwt
   if (isPasswordValid) {
