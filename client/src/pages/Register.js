@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Register() {
@@ -5,8 +6,11 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   async function registerUser(event) {
     event.preventDefault();
+
     const response = await fetch("http://localhost:1337/api/register", {
       method: "POST",
       headers: {
@@ -20,6 +24,12 @@ function Register() {
     });
 
     const data = await response.json();
+
+    // if registration is successful
+    //  navigate to login page
+    if (data.status === "ok") {
+      navigate("/login");
+    }
     console.log(data);
   }
 
