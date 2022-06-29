@@ -5,10 +5,31 @@ const router = express.Router();
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const helper = require("../helpers/helper");
 
 //api endpoint for registration
 router.post("/api/register", async (req, res) => {
-  console.log(req.body);
+  // validate email address, if incorrect return false
+  if (!helper.isEmailValid(req.body.email)) {
+    return res.json({ status: "error", error: "Invalid Email Address!" });
+  }
+
+  // validate if phone number is valid
+  if (!helper.isValidPhone(req.body.phone)) {
+    return res.json({
+      status: "error",
+      error: "Provide a valid 11 digit phone number!",
+    });
+  }
+
+  // validate if base64 image is valid
+  if (!helper.isValidBase64(req.body.image)) {
+    return res.json({
+      status: "error",
+      error: "Provide a valid image file!",
+    });
+  }
+
   try {
     // encrypting the password
     const newPassword = await bcrypt.hash(req.body.password, 10);
@@ -33,13 +54,21 @@ router.post("/api/register", async (req, res) => {
 
 //api endpoint for login
 router.post("/api/login", async (req, res) => {
+  // if not a valied email, return error
+  if (!helper.isEmailValid(req.body.email)) {
+    return res.json({
+      status: "error",
+      error: "Provide a valid Email Address!",
+    });
+  }
+
   // get user from db
   const user = await User.findOne({
     email: req.body.email,
   });
 
   if (!user) {
-    return res.json({ status: "error", error: "Invalid Email" });
+    return res.json({ status: "error", error: "User does not exist!" });
   }
 
   // checking if user password is valid
