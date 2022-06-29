@@ -15,8 +15,10 @@ router.post("/api/register", async (req, res) => {
     //creating User document according to schema
     const user = await User.create({
       name: req.body.name,
+      phone: req.body.phone,
       email: req.body.email,
       password: newPassword,
+      image: req.body.image,
     });
     res.json({ status: "ok" });
   } catch (err) {
