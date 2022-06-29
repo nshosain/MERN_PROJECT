@@ -121,6 +121,7 @@ function Register() {
         <input
           type="file"
           style={{ width: "170px", overflow: "hidden" }}
+          accept="image/png, image/gif, image/jpeg"
           onChange={(e) => {
             uploadImage(e);
           }}

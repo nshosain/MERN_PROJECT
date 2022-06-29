@@ -65,7 +65,10 @@ const Dashboard = () => {
       <h1>Welcome {name}!</h1>
       <h4>
         Checkout the Git Repo
-        <a href="https://github.com/nshosain/MERN_PROJECT"> here!</a>
+        <a href="https://github.com/nshosain/MERN_PROJECT" target="_blank">
+          {" "}
+          here!
+        </a>
       </h4>
       <br />
       <img src={image} height="400px" />
