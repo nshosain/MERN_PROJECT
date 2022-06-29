@@ -11,7 +11,6 @@ const Dashboard = () => {
     const response = await fetch("http://localhost:1337/api/userdata", {
       method: "GET",
       headers: {
-        "content-type": "application/json",
         "x-access-token": localStorage.getItem("token"),
       },
     });

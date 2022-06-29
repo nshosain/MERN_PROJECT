@@ -28,6 +28,7 @@ function Register() {
     // if registration is successful
     //  navigate to login page
     if (data.status === "ok") {
+      alert("Registration Successful!");
       navigate("/login");
     }
     console.log(data);

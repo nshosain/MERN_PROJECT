@@ -24,7 +24,7 @@ function Login() {
     if (data.user) {
       // keeping jwt token in browser storage
       localStorage.setItem("token", data.user);
-      alert("Login Successful!");
+
       // redirect to dashboard page
       window.location.href = "/dashboard";
     } else {

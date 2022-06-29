@@ -4,16 +4,19 @@ const router = express.Router();
 //getting User schema
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 //api endpoint for registration
 router.post("/api/register", async (req, res) => {
   console.log(req.body);
   try {
+    // encrypting the password
+    const newPassword = await bcrypt.hash(req.body.password, 10);
     //creating User document according to schema
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: newPassword,
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -31,11 +34,20 @@ router.post("/api/login", async (req, res) => {
   // get user from db
   const user = await User.findOne({
     email: req.body.email,
-    password: req.body.password,
   });
 
-  //if user account exists
-  if (user) {
+  // checking if user password is valid
+  const isPasswordValid = await bcrypt.compare(
+    req.body.password,
+    user.password
+  );
+
+  if (!user) {
+    return { status: "error", error: "Invalid Email" };
+  }
+
+  //if user password is valid, return user with jwt
+  if (isPasswordValid) {
     //initiate a jwt token for the logged in user
     const token = jwt.sign(
       {
@@ -48,7 +60,11 @@ router.post("/api/login", async (req, res) => {
     //send the jwt token to client app
     return res.json({ status: "ok", user: token });
   } else {
-    return res.json({ status: "error", user: false });
+    return res.json({
+      status: "error",
+      error: "Invalid Password",
+      user: false,
+    });
   }
 });
 

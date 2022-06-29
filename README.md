@@ -28,3 +28,4 @@ npm run dev
 
 > http://localhost:1337/api/register
 > http://localhost:1337/api/login
+> http://localhost:1337/api/userdata
