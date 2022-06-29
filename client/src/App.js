@@ -1,6 +1,11 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 // importing pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -11,6 +16,7 @@ const App = () => {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} exact />
           <Route path="/register" element={<Register />} exact />
           <Route path="/dashboard" element={<Dashboard />} exact />

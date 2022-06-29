@@ -55,6 +55,11 @@ function Login() {
         <br />
         <input type="submit" value="Login" />
       </form>
+      <div>
+        <p>
+          Not a member? <a href="/register"> Sign Up!</a>
+        </p>
+      </div>
     </div>
   );
 }

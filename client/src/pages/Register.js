@@ -62,6 +62,11 @@ function Register() {
         <br />
         <input type="submit" value="Register" />
       </form>
+      <div>
+        <p>
+          Already a member? <a href="/login"> Sign In!</a>
+        </p>
+      </div>
     </div>
   );
 }
