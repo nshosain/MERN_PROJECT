@@ -1,8 +1,8 @@
 # MERN_PROJECT 💣
 
-> A simple MERN project including Login and Registration Functionalities with JWT
+A simple MERN project including Login and Registration Functionalities with JWT
 > No Need to connect to MongoDB, already hookedup with a Shared Cluster! ⚓
-> Package Manager: **npm**
+Package Manager: **npm**
 
 ## Clone this repo 🧲
 
