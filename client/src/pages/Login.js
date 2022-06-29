@@ -4,6 +4,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // checks if any of the input fields are empty
   function isInputValid() {
     if (email === "" || password === "") {
       alert("Fields Can not be empty!");
@@ -15,6 +16,8 @@ function Login() {
 
   async function loginUser(event) {
     event.preventDefault();
+
+    //if input fields are valid, proceed
     if (isInputValid()) {
       const response = await fetch("http://localhost:1337/api/login", {
         method: "POST",

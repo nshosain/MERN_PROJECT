@@ -6,6 +6,15 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
 
+  // logout user form system
+  function logout() {
+    console.log("fucasdasds");
+    // clearing JWT token
+    localStorage.clear();
+    // redirect to login page
+    window.location.href = "/login";
+  }
+
   // gets user information from backend
   async function getUserInfo() {
     const response = await fetch("http://localhost:1337/api/userdata", {
@@ -58,6 +67,8 @@ const Dashboard = () => {
         Checkout the Git Repo
         <a href="https://github.com/nshosain/MERN_PROJECT"> here!</a>
       </h4>
+      <br />
+      <button onClick={logout}>Logout</button>
     </div>
   );
 };

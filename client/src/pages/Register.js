@@ -8,6 +8,7 @@ function Register() {
 
   const navigate = useNavigate();
 
+  // checks if any of the input fields are empty
   function isInputValid() {
     if (name === "" || email === "" || password === "") {
       alert("Fields Can not be empty!");
@@ -19,6 +20,8 @@ function Register() {
 
   async function registerUser(event) {
     event.preventDefault();
+    
+    //if input fields are valid, proceed
     if (isInputValid()) {
       const response = await fetch("http://localhost:1337/api/register", {
         method: "POST",
